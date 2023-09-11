@@ -1,5 +1,6 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from 'typeorm'
+import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from 'typeorm'
 import { Person } from './utils/Person';
+import { Transaction } from './Transation';
 
 @Entity('client')
 export class Client extends Person {
@@ -36,4 +37,9 @@ export class Client extends Person {
     })
     family_numbers: string[];
 
+    @OneToMany(
+        () => Transaction,
+        (transaction) => transaction.client
+    )
+    transactions: Transaction[];
 }
